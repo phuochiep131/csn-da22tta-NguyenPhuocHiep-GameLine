@@ -37,3 +37,68 @@ async function setupCamera() {
         minDetectionConfidence: 0.7,
         minTrackingConfidence: 0.5,
     });
+
+    hands.onResults((results) => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.save();
+
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        ctx.restore();
+
+        if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
+            const landmarks = results.multiHandLandmarks[0];
+
+            const thumbTip = landmarks[4];
+            const thumbIp = landmarks[3];
+
+            const indexFingerTip = landmarks[8];
+            const indexFingerPip = landmarks[6];
+
+            const middleFingerTip = landmarks[12];
+            const middleFingerPip = landmarks[10];
+
+            const ringFingerTip = landmarks[16];
+            const ringFingerPip = landmarks[14];
+
+            const pinkyFingerTip = landmarks[20];
+            const pinkyFingerPip = landmarks[18];
+
+            const x = (1-indexFingerTip.x) * window.innerWidth;
+            const y = indexFingerTip.y * window.innerHeight;
+
+            ctx.beginPath();
+                ctx.arc(indexFingerTip.x * canvas.width, indexFingerTip.y * canvas.height, 10, 0, Math.PI * 2);
+                ctx.fillStyle = 'red';
+                ctx.fill();
+
+            if (indexFingerTip.y < indexFingerPip.y && middleFingerTip.y > middleFingerPip.y &&
+                ringFingerTip.y > ringFingerPip.y && pinkyFingerTip.y > pinkyFingerPip.y &&
+                (   
+                    calculateDistance(thumbIp, middleFingerPip) < 0.04 ||
+                    calculateDistance(thumbIp, landmarks[5]) < 0.04 ||
+                    calculateDistance(thumbTip, middleFingerPip) < 0.04
+                )
+            ) 
+            {
+                cursorX = x + canvas.offsetLeft;
+                cursorY = y + canvas.offsetTop;
+
+                // console.log(cursorX + "       y: "+cursorY)
+                moveCursor(cursorX, cursorY);      
+            }
+            
+            if (indexFingerTip.y > indexFingerPip.y && calculateDistance(thumbTip, landmarks[5]) > 0.04) {
+                //console.log(delay)
+                const cell = getCellFromPosition(cursorX, cursorY);
+                
+                if (cell && (delay % 12 === 0)) {
+                    delay++;
+                    cell.click(); 
+                } else {
+                    delay++;
+                }
+            }
+        }
+    });
