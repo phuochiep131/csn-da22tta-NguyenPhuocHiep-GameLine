@@ -102,3 +102,51 @@ async function setupCamera() {
             }
         }
     });
+    const camera = new Camera(video, {
+    onFrame: async () => {
+        await hands.send({ image: video });
+    },
+    width: 640,
+    height: 480,
+});
+camera.start();
+}
+
+function getCellFromPosition(x, y) {
+const cells = document.querySelectorAll('.cell');
+for (let i = 0; i < cells.length; i++) {
+    const cell = cells[i];
+    const rect = cell.getBoundingClientRect();
+
+    if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+        return cell;
+    }
+}
+return null;
+}
+
+function calculateDistance(Tip1, Tip2) {
+let dx = Tip1.x - Tip2.x;
+let dy = Tip1.y - Tip2.y;
+return Math.sqrt(dx * dx + dy * dy);
+}
+
+function moveCursor(x, y) {
+const cursor = document.getElementById('customCursor');
+cursor.style.left = `${x-10}px`;
+cursor.style.top = `${y}px`;
+}
+
+function setupCustomCursor() {
+const cursor = document.createElement('div');
+cursor.id = 'customCursor';
+cursor.style.position = 'absolute';
+cursor.style.width = '20px'; // Kích thước của ảnh PNG
+cursor.style.height = '20px';
+cursor.style.backgroundImage = 'url("../another/picture/handup.png")'; 
+cursor.style.backgroundSize = 'contain';
+cursor.style.backgroundRepeat = 'no-repeat';
+cursor.style.backgroundPosition = 'center';
+cursor.style.pointerEvents = 'none'; // Bỏ qua sự kiện chuột
+document.body.appendChild(cursor);
+}
