@@ -31,73 +31,83 @@ async function setupCamera() {
         locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`,
     });
 
-    hands.setOptions({
-        maxNumHands: 1,
-        modelComplexity: 1,
-        minDetectionConfidence: 0.7,
-        minTrackingConfidence: 0.5,
-    });
-
     hands.onResults((results) => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+    
         ctx.save();
-
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
         ctx.restore();
-
+    
         if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
-            const landmarks = results.multiHandLandmarks[0];
+            const handedness = results.multiHandedness[0].label; // "Left" hoặc "Right"
+            console.log(handedness)
 
+            const landmarks = results.multiHandLandmarks[0];
+    
             const thumbTip = landmarks[4];
             const thumbIp = landmarks[3];
-
+    
             const indexFingerTip = landmarks[8];
             const indexFingerPip = landmarks[6];
-
+    
             const middleFingerTip = landmarks[12];
             const middleFingerPip = landmarks[10];
-
+    
             const ringFingerTip = landmarks[16];
             const ringFingerPip = landmarks[14];
-
+    
             const pinkyFingerTip = landmarks[20];
             const pinkyFingerPip = landmarks[18];
-
-            const x = (1-indexFingerTip.x) * window.innerWidth;
+    
+            const x = (1 - indexFingerTip.x) * window.innerWidth;
             const y = indexFingerTip.y * window.innerHeight;
-
+    
             ctx.beginPath();
-                ctx.arc(indexFingerTip.x * canvas.width, indexFingerTip.y * canvas.height, 10, 0, Math.PI * 2);
-                ctx.fillStyle = 'red';
-                ctx.fill();
+            ctx.arc(indexFingerTip.x * canvas.width, indexFingerTip.y * canvas.height, 10, 0, Math.PI * 2);
+            ctx.fillStyle = 'red';
+            ctx.fill();
+    
+            if (handedness === "Left") {
 
-            if (indexFingerTip.y < indexFingerPip.y && middleFingerTip.y > middleFingerPip.y &&
-                ringFingerTip.y > ringFingerPip.y && pinkyFingerTip.y > pinkyFingerPip.y &&
-                (   
-                    calculateDistance(thumbIp, middleFingerPip) < 0.04 ||
-                    calculateDistance(thumbIp, landmarks[5]) < 0.04 ||
-                    calculateDistance(thumbTip, middleFingerPip) < 0.04
-                )
-            ) 
-            {
-                cursorX = x + canvas.offsetLeft;
-                cursorY = y + canvas.offsetTop;
-
-                // console.log(cursorX + "       y: "+cursorY)
-                moveCursor(cursorX, cursorY);      
-            }
-            
-            if (indexFingerTip.y > indexFingerPip.y && calculateDistance(thumbTip, landmarks[5]) > 0.04) {
-                //console.log(delay)
-                const cell = getCellFromPosition(cursorX, cursorY);
-                
-                if (cell && (delay % 12 === 0)) {
-                    delay++;
-                    cell.click(); 
-                } else {
-                    delay++;
+                if (indexFingerTip.y < indexFingerPip.y && middleFingerTip.y > middleFingerPip.y &&
+                    ringFingerTip.y > ringFingerPip.y && pinkyFingerTip.y > pinkyFingerPip.y &&
+                    thumbTip.x < thumbIp.x) 
+                {
+                    cursorX = x + canvas.offsetLeft;
+                    cursorY = y + canvas.offsetTop;
+                    moveCursor(cursorX, cursorY);
+                }
+    
+                if (indexFingerTip.y > indexFingerPip.y && thumbTip.x > thumbIp.x) {
+                    const cell = getCellFromPosition(cursorX, cursorY);
+                    if (cell && canClick) {
+                        canClick = false;
+                        cell.click();
+                        
+                        setTimeout(() => {
+                            canClick = true;
+                        }, 1000);
+                    }
+                }
+            } else if (handedness === "Right") {
+                if (indexFingerTip.y < indexFingerPip.y && middleFingerTip.y > middleFingerPip.y &&
+                    ringFingerTip.y > ringFingerPip.y && pinkyFingerTip.y > pinkyFingerPip.y &&
+                    thumbTip.x > thumbIp.x) 
+                {
+                    cursorX = x + canvas.offsetLeft;
+                    cursorY = y + canvas.offsetTop;
+                    moveCursor(cursorX, cursorY);
+                }
+    
+                if (indexFingerTip.y > indexFingerPip.y && thumbTip.x < thumbIp.x) { 
+                    const cell = getCellFromPosition(cursorX, cursorY);
+                    if (cell && canClick) {
+                        canClick = false;
+                        cell.click();
+                        setTimeout(() => {
+                            canClick = true;
+                        }, 1000);
+                    }
                 }
             }
         }
