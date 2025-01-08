@@ -33,7 +33,6 @@ function CreateBroad() {
   }
 }
 
-let arr_pre = [];
 
 function SetBall() {
   for (let i = 0; i < arr_pre.length; i += 3) {
@@ -61,6 +60,7 @@ function SetBall() {
   arr_pre = [];
 }
 
+let arr_pre = [];
 function SetBall_pre(index1, index2, rdc_index) {
   if (arr[index1][index2] === 0) {
     const cells = document.getElementsByClassName("cell");
@@ -139,18 +139,21 @@ async function moveBall(index1, index2) {
     selectedX = nextX;
     selectedY = nextY;
 
-    //them async
     await new Promise((resolve) => setTimeout(resolve, 30));
   }
+
   selectedBall = null;
   selectedX = -1;
   selectedY = -1;
+  
   if (checkAllForFiveBalls()) {
   } else {
     SetBall();
     checkAllForFiveBalls();
     CreateBall();
   }
+  console.log(arr)
+  
   if (isBoardFull() == 81 || endgame === 2) {
     document.getElementById("gameOverModal").style.display = "flex";
     document.getElementById("scoreshow").textContent = score;
@@ -230,31 +233,26 @@ function isValid(x, y) {
 
 function selectOrMoveBall(index1, index2) {
   const cells = document.getElementsByClassName("cell");
-
   if (selectedBall === null && arr[index1][index2] !== 0) {
     selectedBall = cells[index1 * arr.length + index2].querySelector(".circle");
     selectedX = index1;
     selectedY = index2;
     selectedBall.classList.add("selected");
   } else if (
-    (selectedBall !== null && arr[index1][index2] === 0) ||
-    (selectedBall !== null && arr[index1][index2] === -1)
+      (selectedBall !== null && arr[index1][index2] === 0) || 
+      (selectedBall !== null && arr[index1][index2] === -1)
   ) {
     if (hasPath(selectedX, selectedY, index1, index2)) {
       moveBall(index1, index2);
     } else {
-      //alert('Không có đường đi!');
       selectedBall.classList.remove("selected");
       selectedBall = null;
       selectedX = -1;
       selectedY = -1;
     }
   } else if (
-    selectedBall !== null &&
-    arr[index1][index2] !== 0 &&
-    arr[index1][index2] !== -1
+    selectedBall !== null && arr[index1][index2] !== 0 && arr[index1][index2] !== -1
   ) {
-    // Hủy chọn bóng cũ và chọn bóng mới nếu nhấp vào quả bóng khác
     selectedBall.classList.remove("selected");
     selectedBall = cells[index1 * arr.length + index2].querySelector(".circle");
     selectedX = index1;
@@ -337,9 +335,7 @@ function checkAllForFiveBalls() {
             score = score + positions.length * 10;
           }
 
-          document.getElementById("score").textContent = score;
-
-          
+          document.getElementById("score").textContent = score;       
           lib.get_Point_ByID(useridgame).then((point) => {
             curr_point_db = point;
           });
@@ -510,7 +506,7 @@ function Playgame() {
 
 import * as lib from "./firebase.js";
 const useridgame = lib.AutoRandomID();
-lib.writeUserData(useridgame, GetName(), GetPoint());
+//lib.writeUserData(useridgame, GetName(), GetPoint());
 
 setupCustomCursor();
 setupCamera();

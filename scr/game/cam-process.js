@@ -48,8 +48,7 @@ async function setupCamera() {
     ctx.restore();
 
     if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
-      const handedness = results.multiHandedness[0].label; // "Left" hoặc "Right"
-      //console.log(handedness)
+      const handedness = results.multiHandedness[0].label; 
 
       const landmarks = results.multiHandLandmarks[0];
 

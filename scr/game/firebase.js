@@ -56,15 +56,11 @@ export function getUserData() {
 
   onValue(postsRef, (snapshot) => {
     const data = snapshot.val();
-
-    // Process the user data into an array
     let usersArray = Object.keys(data).map((key) => {
       return { id: key, ...data[key] };
     });
 
     usersArray.sort((a, b) => b.Point - a.Point);
-    //console.log(usersArray)
-
     WriteScore("highscore", usersArray);
   });
 }
@@ -77,7 +73,6 @@ export function WriteScore(idtag, plr) {
     scoreText +=
       "Hạng " + (i + 1) + ": " + plr[i].Name + " " + plr[i].Point + "<br>";
   }
-  
   for (let i = 0; i < plr.length; i++) {
     if(plr[i].id === lib.getID()){
       scoreText += ("Hạng của bạn là: " + (i+1))
