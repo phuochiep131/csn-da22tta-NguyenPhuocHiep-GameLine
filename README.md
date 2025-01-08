@@ -11,7 +11,7 @@ Game Lines là một trò chơi giải trí cổ điển, đây là một trò c
 
 Đề tài này hướng đến việc phát triển phiên bản khác của game Lines trên nền tảng web, kết hợp với công nghệ MediaPipe để mang lại trải nghiệm mới mẻ cho người chơi. MediaPipe là một thư viện mã nguồn mở của Google, cung cấp các giải pháp AI như nhận diện bàn tay, khuôn mặt, cử chỉ và chuyển động cơ thể,... Việc tích hợp MediaPipe vào trò chơi không chỉ mang lại sự tương tác tự nhiên và linh hoạt mà còn mở ra cơ hội khám phá những ứng dụng của AI trong lĩnh vực giải trí, giáo dục và các lĩnh vực khác.
 
-- Trình tự thực hiện đồ án  
+## Trình tự thực hiện đồ án  
 - Bước 1: Tìm hiểu game Lines và MediaPipe  
 	- Tìm hiểu về luật chơi, cơ chế trò chơi của game Lines.  
 	- Tìm hiểu về MediaPipe, nghiên cứu tập trung về MediaPipe Hands dùng để nhận diện cử chỉ tay.  
