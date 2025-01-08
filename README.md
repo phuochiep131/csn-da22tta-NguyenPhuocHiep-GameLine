@@ -1,7 +1,7 @@
 # Game-Lines
 ## Thiết kế game Lines với mediapipe, Nguyễn Phước Hiệp 110122005 DA22TTA
 
-# Giới thiệu
+## Giới thiệu
 Đây là dự án tôi về "Phát triển game Lines trên web sử dụng MediaPipe với tương tác điều khiển bằng cử chỉ tay". Tôi đã triển khai dự án này bằng cách sử dụng HTML, CSS, JavaScript và sử dụng thư viện MediaPipe để nhận diện cử chỉ tay từ người chơi. 
 
 Với sự phát triển vượt bậc của công nghệ, các cách thức tương tác giữa con người và máy tính liên tục được cải tiến. Từ những thiết bị truyền thống như bàn phím và chuột, công nghệ hiện đại đã chuyển hướng sang các phương thức tương tác không chạm, bao gồm nhận diện cử chỉ, nhận diện khuôn mặt và theo dõi chuyển động cơ thể. Những bước tiến này không chỉ nâng cao sự tiện lợi mà còn mang đến nhiều trải nghiệm độc đáo và sáng tạo trong các lĩnh vực như y tế, giáo dục, và đặc biệt là giải trí.
