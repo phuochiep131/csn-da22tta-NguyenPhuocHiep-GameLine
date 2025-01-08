@@ -25,3 +25,6 @@ Game Lines là một trò chơi giải trí cổ điển, đây là một trò c
 - Bước 3: Kiểm tra, tích hợp thêm các tính năng bổ sung  
 	- Kiểm thử độ chính xác của các tính năng được điều khiển bằng cử chỉ tay.  
 	- Cải thiện lại giao diện, thêm âm thanh và bảng xếp hạng.  
+
+## Cách chạy chương trình
+Tải toàn bộ mã nguồn từ thư mục scr, tiếp đến chỉ cần chạy file "index.html" bên trong thư mục scr là đã có thể chạy được trò chơi
