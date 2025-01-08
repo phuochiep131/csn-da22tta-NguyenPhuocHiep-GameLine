@@ -27,4 +27,6 @@ Game Lines là một trò chơi giải trí cổ điển, đây là một trò c
 	- Cải thiện lại giao diện, thêm âm thanh và bảng xếp hạng.  
 
 ## Cách chạy chương trình
-Tải toàn bộ mã nguồn từ thư mục scr, tiếp đến chỉ cần chạy file "index.html" bên trong thư mục scr là đã có thể chạy được trò chơi
+Tải Visual Studio Code và cài đặt về máy.
+Mở Visual Studio Code và cài các extensions về HTML, CSS, JavaScript và Live Server.
+Tải toàn bộ mã nguồn từ thư mục scr, tiếp đến chỉ cần nháy phải chuột vào file "index.html" bên trong thư mục scr --> Open with Live Server là đã có thể chạy được trò chơi.
