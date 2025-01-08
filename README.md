@@ -10,18 +10,18 @@ Game Lines là một trò chơi giải trí cổ điển, đây là một trò c
 
 Đề tài này hướng đến việc phát triển phiên bản khác của game Lines trên nền tảng web, kết hợp với công nghệ MediaPipe để mang lại trải nghiệm mới mẻ cho người chơi. MediaPipe là một thư viện mã nguồn mở của Google, cung cấp các giải pháp AI như nhận diện bàn tay, khuôn mặt, cử chỉ và chuyển động cơ thể,... Việc tích hợp MediaPipe vào trò chơi không chỉ mang lại sự tương tác tự nhiên và linh hoạt mà còn mở ra cơ hội khám phá những ứng dụng của AI trong lĩnh vực giải trí, giáo dục và các lĩnh vực khác.
 
-Trình tự thực hiện đồ án  
-Bước 1: Tìm hiểu game Lines và MediaPipe  
-	Tìm hiểu về luật chơi, cơ chế trò chơi của game Lines.  
-	Tìm hiểu về MediaPipe, nghiên cứu tập trung về MediaPipe Hands dùng để nhận diện cử chỉ tay.  
-	Tìm hiểu về HTML, CSS, JavaScript, một số cách thức làm việc với sự kiện trong JavaScript.  
-Bước 2: Xây dựng trò chơi trên web  
-	Thiết kế giao diện trò chơi  
-	Sử dụng HTML, CSS để xây dựng giao diện nhập tên và giao diện chính của game.  
-	Sử dụng JavaScript để xử lí các sự kiện để tương tác với người chơi, thiết kế các logic của game như tạo bóng và bóng dự đoán ngẫu nhiên, di chuyển bóng, cập nhật điểm, kết thúc trò chơi.  
-	Sử dụng thuật toán tìm đường đi BFS để thực hiện việc di chuyển bóng giữa hai điểm bất kì.  
-	Sử dụng Realtime Database của Firebase để minh họa một bảng xếp hạng.  
-	Cài đặt và ứng dụng thư viện MediaPipe để xử lí cử chỉ tay, từ đó đặt ra điều kiện cho cử chỉ tay để người chơi tương tác với trò chơi.  
-Bước 3: Kiểm tra, tích hợp thêm các tính năng bổ sung  
-	Kiểm thử độ chính xác của các tính năng được điều khiển bằng cử chỉ tay.  
-	Cải thiện lại giao diện, thêm âm thanh và bảng xếp hạng.  
+- Trình tự thực hiện đồ án  
+-Bước 1: Tìm hiểu game Lines và MediaPipe  
+	- Tìm hiểu về luật chơi, cơ chế trò chơi của game Lines.  
+	- Tìm hiểu về MediaPipe, nghiên cứu tập trung về MediaPipe Hands dùng để nhận diện cử chỉ tay.  
+	- Tìm hiểu về HTML, CSS, JavaScript, một số cách thức làm việc với sự kiện trong JavaScript.  
+-Bước 2: Xây dựng trò chơi trên web  
+	- Thiết kế giao diện trò chơi  
+	- Sử dụng HTML, CSS để xây dựng giao diện nhập tên và giao diện chính của game.  
+	- Sử dụng JavaScript để xử lí các sự kiện để tương tác với người chơi, thiết kế các logic của game như tạo bóng và bóng dự đoán ngẫu nhiên, di chuyển bóng, cập nhật điểm, kết thúc trò chơi.  
+	- Sử dụng thuật toán tìm đường đi BFS để thực hiện việc di chuyển bóng giữa hai điểm bất kì.  
+	- Sử dụng Realtime Database của Firebase để minh họa một bảng xếp hạng.  
+	- Cài đặt và ứng dụng thư viện MediaPipe để xử lí cử chỉ tay, từ đó đặt ra điều kiện cho cử chỉ tay để người chơi tương tác với trò chơi.  
+-Bước 3: Kiểm tra, tích hợp thêm các tính năng bổ sung  
+	- Kiểm thử độ chính xác của các tính năng được điều khiển bằng cử chỉ tay.  
+	- Cải thiện lại giao diện, thêm âm thanh và bảng xếp hạng.  
